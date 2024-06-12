@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Some photos</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: -webkit-flex;
+            display: flex;
+            flex-direction: column;
+        }
+
+        img {
+            width: 450px;
+            height: 300px;
+            margin: 10px;
+            border: 3px solid #9802ff;
+            border-radius: 10px;
+            transition-duration: 1s;
+        }
+
+        img:hover {
+            border: 1px solid #9802ff;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Gallery</h1>
+</header>
+
+<main>
+    <div id="container">
+        <img class="photos" src="static/alo.jpg" alt="">
+        <img class="photos" src="static/timAAXAXXAXXAX.png" alt="">
+        <img class="photos" src="static/bus.jpg" alt="">
+        <img class="photos" src="static/maslo.jpg" alt="">
+        <img class="photos" src="static/ded.jpg" alt="">
+        <img class="photos" src="static/noaffraid.jpg"
+             alt="">
+    </div>
+</main>
+</body>
+</html>

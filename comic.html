@@ -13,7 +13,7 @@
 <main>
     <div id="info">
         <p id="title" class="info" style="text-align: center"></p>
-        <img id="image" src="" alt="">
+        <img id="image" src="https://media.tenor.com/On7kvXhzml4AAAAi/loading-gif.gif" style="scale: 25%" alt="">
         <p id="date" class="info"></p>
     </div>
 </main>
@@ -58,6 +58,8 @@
                 title.textContent = data.safe_title;
                 image.alt = data.alt;
                 image.src = data.img;
+                image.style.scale = "100%";
+                image.style.width = "90%";
                 const event = new Date(data.year, data.month - 1, data.day);
                 date.textContent = event.toLocaleDateString();
             })

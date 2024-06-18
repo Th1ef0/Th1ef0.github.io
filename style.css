@@ -58,3 +58,22 @@ footer {
     scale: 1.25;
 }
 
+#info{
+    margin: 10px;
+    border-radius: 15px;
+    border-color: #8567a2;
+    border-style: solid;
+    background: #c899ef;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#image{
+    width: 90%;
+    border-radius: 5px;
+}
+

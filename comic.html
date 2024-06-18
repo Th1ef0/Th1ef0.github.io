@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Comic</title>
+</head>
+<body>
+<header>
+    <h1>My comic</h1>
+</header>
+
+<main>
+    <div id="info">
+        <p id="title" class="info" style="text-align: center"></p>
+        <img id="image" src="" alt="">
+        <p id="date" class="info"></p>
+    </div>
+</main>
+
+<footer>
+    <h1>Contact with me!!!</h1>
+    <nav>
+        <a class="contact" id="gh-link" href="https://github.com/Th1ef0"><img class="icons"
+                                                                              src="static/icons8-github-48.png"
+                                                                              alt="github"></a>
+        <a class="contact" id="vk-link" href="https://vk.com/id194895811"><img class="icons"
+                                                                               src="static/icons8-vk-48.png"
+                                                                               alt="vk"></a>
+        <a class="contact" id="tg-link" href="https://t.me/Th1ef0"><img class="icons"
+                                                                        src="static/icons8-телеграмма-app-48.png"
+                                                                        alt="telegram"></a>
+    </nav>
+</footer>
+
+<script>
+    const title = document.getElementById('title');
+    const image = document.getElementById('image');
+    const date = document.getElementById('date')
+
+    getData();
+    function getData() {
+        const params = new URLSearchParams();
+        params.append("email", "k.karsakov@innopolis.university");
+        fetch("https://fwd.innopolis.university/api/hw2?" + params.toString())
+            .then(r => r.text())
+            .then(id => {
+                return fetch("https://fwd.innopolis.university/api/comic?id=" + id.toString());
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                title.textContent = data.safe_title;
+                image.alt = data.alt;
+                image.src = data.img;
+                const event = new Date(data.year, data.month - 1, data.day);
+                date.textContent = event.toLocaleDateString();
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    }
+
+</script>
+</body>
+</html>

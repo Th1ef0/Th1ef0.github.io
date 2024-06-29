@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <meta charset="UTF-8">
     <title>Comic</title>
 </head>
@@ -34,40 +34,6 @@
 
 </footer>
 
-<script>
-    const title = document.getElementById('title');
-    const image = document.getElementById('image');
-    const date = document.getElementById('date')
-
-    getData();
-    function getData() {
-        const params = new URLSearchParams();
-        params.append("email", "k.karsakov@innopolis.university");
-        fetch("https://fwd.innopolis.university/api/hw2?" + params.toString())
-            .then(r => r.text())
-            .then(id => {
-                return fetch("https://fwd.innopolis.university/api/comic?id=" + id.toString());
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                title.textContent = data.safe_title;
-                image.alt = data.alt;
-                image.src = data.img;
-                image.style.scale = "100%";
-                image.style.width = "90%";
-                const event = new Date(data.year, data.month - 1, data.day);
-                date.textContent = event.toLocaleDateString();
-            })
-            .catch(error => {
-                console.error('Fetch error:', error);
-            });
-    }
-</script>
+<script src="bundle.js"></script>
 </body>
 </html>

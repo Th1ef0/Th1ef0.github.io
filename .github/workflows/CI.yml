@@ -37,6 +37,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Lint project
+        run: npm run lint
+
+      - name: Check project
+        run : npm run check
+
       - name: Build project
         run: npm run build
 

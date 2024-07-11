@@ -1,8 +1,5 @@
 <script lang="ts">
-	export let title: string;
-	export let imageAlt: string;
-	export let imageUrl: string;
-	export let formattedDate: string;
+	export let data;
 </script>
 
 <svelte:head>
@@ -12,9 +9,9 @@
 
 <main>
 	<div>
-		<h1 class="text">{title}</h1>
-		<img src={imageUrl} alt={imageAlt} />
-		<p class="text">{formattedDate}</p>
+		<h1 class="text">{data.comic.title}</h1>
+		<img src={data.comic.imageUrl} alt={data.comic.imageAlt} />
+		<p class="text">{data.comic.date}</p>
 	</div>
 </main>
 

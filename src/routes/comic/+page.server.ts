@@ -32,11 +32,12 @@ export async function load() {
 
 	const event = new Date(parseInt(data.year), parseInt(data.month) - 1, parseInt(data.day));
 	const formattedDate = formatDistanceToNow(event);
-
 	return {
-		title: data.safe_title,
-		imageAlt: data.alt,
-		imageUrl: data.img,
-		formattedDate
+		comic: {
+			title: data.safe_title,
+			imageAlt: data.alt,
+			imageUrl: data.img,
+			date: formattedDate
+		}
 	};
 }

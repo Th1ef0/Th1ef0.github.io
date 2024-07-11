@@ -1,44 +1,43 @@
-<script lang="ts">
-	import { onMount } from 'svelte';
+<script context="module" lang="ts">
+	import type { Load } from '@sveltejs/kit';
 	import { formatDistanceToNow } from 'date-fns';
 	import type { Comic } from './interface';
 
-	let title: string = '';
-	let imageAlt: string = '';
-	let imageUrl: string = '';
-	let formattedDate: string = '';
-
-	function getData() {
+	export const load: Load = async ({ fetch }) => {
 		const params = new URLSearchParams();
 		params.append('email', 'k.karsakov@innopolis.university');
 
-		fetch('https://fwd.innopolis.university/api/hw2?' + params.toString())
-			.then((r) => r.text())
-			.then((id) => {
-				return fetch('https://fwd.innopolis.university/api/comic?id=' + id.toString());
-			})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				return response.json() as Promise<Comic>;
-			})
-			.then((data) => {
-				console.log(data);
-				title = data.safe_title;
-				imageAlt = data.alt;
-				imageUrl = data.img;
-				const event = new Date(parseInt(data.year), parseInt(data.month) - 1, parseInt(data.day));
-				formattedDate = formatDistanceToNow(event);
-			})
-			.catch((error) => {
-				console.error('Fetch error:', error);
-			});
-	}
+		const response1 = await fetch('https://fwd.innopolis.university/api/hw2?' + params.toString());
+		const id = await response1.text();
 
-	onMount(() => {
-		getData();
-	});
+		const response2 = await fetch(`https://fwd.innopolis.university/api/comic?id=${id}`);
+		if (!response2.ok) {
+			throw new Error('Network response was not ok');
+		}
+		const data: Comic = await response2.json();
+
+		const title = data.safe_title;
+		const imageAlt = data.alt;
+		const imageUrl = data.img;
+		const event = new Date(parseInt(data.year), parseInt(data.month) - 1, parseInt(data.day));
+		const formattedDate = formatDistanceToNow(event);
+
+		return {
+			props: {
+				title,
+				imageAlt,
+				imageUrl,
+				formattedDate
+			}
+		};
+	};
+</script>
+
+<script lang="ts">
+	export let title: string;
+	export let imageAlt: string;
+	export let imageUrl: string;
+	export let formattedDate: string;
 </script>
 
 <svelte:head>
